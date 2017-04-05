@@ -1,14 +1,14 @@
 Events = {
   permalink: function() {
-    ga('send', 'event', 'permalink', 'created')
+    ga && ga('send', 'event', 'permalink', 'created');
   },
 
   permalink_error: function(value) {
-    ga('send', 'event', 'permalink', 'error', "" + value);
+    ga && ga('send', 'event', 'permalink', 'error', "" + value);
   },
 
   download: function(size) {
-    ga('send', 'event', 'download', 'clicked', 'size', size);
+    ga && ga('send', 'event', 'download', 'clicked', 'size', size);
   }
 
 }
