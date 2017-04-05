@@ -54,23 +54,38 @@ function parse_object(obj, path) {
     else return {};
 }
 
+function treeFrom(json) {
+    if (isCSV(json)) {
+        return json;
+    } else if ($.type(json) == "object") {
+        var result = {}, found = false;
+        for (var key in json) {
+            var subtree = treeFrom(json[key]);
+            if (subtree) {
+                result[key] = subtree;
+                found = true;
+            }
+        }
+        if (found) {
+            return result;
+        } else if (Object.keys(json).length > 0 && isCSV([json])) {
+            return [json];
+        }
+    }
+}
 
-// otherwise, just find the first one
+function isLeaf(node) {
+    return $.type(node) == "array";
+}
+
+// find the first usable array
 function arrayFrom(json) {
     var queue = [], next = json;
     while (next !== undefined) {
-        if ($.type(next) == "array") {
-
-            // but don't if it's just empty, or an array of scalars
-            if (next.length > 0) {
-
-              var type = $.type(next[0]);
-              var scalar = (type == "number" || type == "string" || type == "boolean" || type == "null");
-
-              if (!scalar)
-                return next;
-            }
-        } if ($.type(next) == "object") {
+        if (isCSV(next)) {
+            return next;
+        }
+        if ($.type(next) == "object") {
           for (var key in next)
              queue.push(next[key]);
         }
@@ -78,6 +93,22 @@ function arrayFrom(json) {
     }
     // none found, consider the whole object a row
     return [json];
+}
+
+function isCSV(object) {
+    if ($.type(object) == "array") {
+        // don't use if it's just empty, or an array of scalars
+        for (var i = 0; i < object.length; ++i) {
+          var entry = object[i];
+          var type = $.type(entry);
+          if (type == "object" && Object.keys(entry).length > 0) {
+            return true;
+          } else if (type == "array" && entry.length > 0) {
+            return true;
+          }
+        }
+    }
+    return false;
 }
 
 // adapted from Mattias Petter Johanssen:

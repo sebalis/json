@@ -50,6 +50,58 @@ h1 {
 }
 .json .permalink {display: none;}
 
+.tree {
+  margin-top: 30px;
+}
+.tree .display {
+  display: inline-block;
+}
+.tree .display ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: none;
+}
+.tree .display .open > ol {
+  display: block;
+}
+.tree .display li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.tree .display ol ol {
+  margin-left: 16px;
+}
+.tree .display a {
+  border-bottom: 1px solid #ddd;
+}
+.tree .display a:focus,
+.tree .display a:active {
+  text-decoration: none;
+}
+.tree .display a:hover {
+  text-decoration: none;
+  background-color: #f7f7f7;
+}
+.tree .display .node > a {
+  color: #666;
+}
+.tree .display .indicator {
+  display: inline-block;
+  width: 16px;
+  height: 1em;
+  background-repeat: no-repeat;
+  position: relative;
+  top: 2px;
+}
+.tree .display .node > .indicator {
+  background-image: url('data:image/gif;base64,R0lGODlhEAAQAMIEAAAAAEBAQH9/f7+/v////////////////yH5BAEKAAQALAAAAAAQABAAAAMgSLrc/jAuIRsAo6oLQpbcFYDhFZXjKX4qK1FaLM80lAAAOw==');
+}
+.tree .display .open.node > .indicator {
+  background-image: url('data:image/gif;base64,R0lGODlhEAAQAMIEAAAAAEBAQH9/f7+/v////////////////yH5BAEKAAQALAAAAAAQABAAAAMfSLrc/jDKSZUAOAMBdY6DN0hBFkwhNk7lWQFVLM90AgA7');
+}
+
 .csv {color: black;margin-top: 30px;}
 .csv textarea {background-color: #f5f5f5; color: #888;}
 
