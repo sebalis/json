@@ -60,6 +60,8 @@ but: only check when on the production domain.
     var newInput = $(".json textarea").val();
     if (newInput == input) return;
 
+    // wipe result
+    $(".csv textarea").val("");
     input = newInput;
     if (!input) {
       // wipe the rendered version too
@@ -87,6 +89,8 @@ but: only check when on the production domain.
       // Show error.
       $("div.warning").hide();
       $("div.error").show();
+      $(".csv .rendered").hide();
+      $(".csv .editing").show();
       $(".json code").html("");
     }
 
@@ -401,7 +405,9 @@ but: only check when on the production domain.
     // highlight CSV on click
     $(".csv textarea").click(function() {$(this).focus().select();});
 
+    // initialize
     loadPermalink();
+    $(".json .editing").trigger("keyup");
   });
 </script>
 
